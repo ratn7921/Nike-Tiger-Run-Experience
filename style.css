@@ -1,0 +1,462 @@
+:root {
+    --white: #ffffff;
+    --black: #111111;
+    --carbon: #0b0b0b;
+    --grey-border: #e5e5e5;
+    --font-heading: 'Antonio', sans-serif;
+    --font-body: 'Archivo Narrow', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: var(--black);
+    color: var(--white);
+    font-family: var(--font-body);
+    font-weight: 500;
+    overflow-x: hidden;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Grain Effect overlay */
+body::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-image: url("https://images.unsplash.com/photo-1620641788421-7a1c342ea42e?auto=format&fit=crop&q=80&w=10");
+    opacity: 0.05;
+    pointer-events: none;
+    z-index: 9999;
+}
+
+html.lenis {
+    height: auto;
+}
+
+.lenis.lenis-smooth {
+    scroll-behavior: auto;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+    overflow: hidden;
+}
+
+/* Typography */
+h1,
+h2,
+h3,
+h4 {
+    font-family: var(--font-heading);
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: -2px;
+    line-height: 0.85;
+}
+
+.title-huge {
+    font-size: clamp(3rem, 10vw, 5.5rem);
+}
+
+.eyebrow {
+    display: block;
+    font-weight: 700;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+/* Layout */
+.container {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: 0 40px;
+}
+
+.white-bg {
+    background-color: var(--white);
+    color: var(--black);
+}
+
+.section {
+    padding: 100px 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* Tiger Engine - Scrollytelling Section */
+.hero-experience {
+    height: 800vh;
+    /* Controlled by ScrollTrigger */
+    position: relative;
+    background: #000;
+}
+
+.sticky-container {
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.canvas-wrapper {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+}
+
+#ambient-canvas {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 110%;
+    height: 110%;
+    object-fit: cover;
+    filter: blur(40px) saturate(1.2);
+    opacity: 0.8;
+}
+
+#tiger-canvas {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    z-index: 2;
+    mask-image: linear-gradient(to bottom, transparent 0%, black 8%, black 92%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 8%, black 92%, transparent 100%);
+}
+
+.hero-text {
+    position: absolute;
+    z-index: 3;
+    width: 100%;
+    text-align: center;
+    pointer-events: none;
+}
+
+.hero-text h1 {
+    font-size: clamp(4rem, 18vw, 15rem);
+    color: var(--white);
+    margin: 0;
+    line-height: 0.8;
+    mix-blend-mode: difference;
+}
+
+.canvas-blur {
+    filter: blur(20px) !important;
+    transition: filter 0.5s ease;
+}
+
+/* Product Intro */
+.centered {
+    text-align: center;
+    align-items: center;
+}
+
+.description {
+    max-width: 600px;
+    margin: 2rem auto;
+    font-size: 1.2rem;
+    color: #444;
+}
+
+/* Buttons */
+.btn {
+    display: inline-block;
+    padding: 12px 32px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: 700;
+    text-transform: uppercase;
+    transition: transform 0.3s ease, background 0.3s ease;
+    font-size: 0.9rem;
+}
+
+.btn:hover {
+    transform: scale(1.05);
+}
+
+.btn-black {
+    background: var(--black);
+    color: var(--white);
+}
+
+.btn-white {
+    background: var(--white);
+    color: var(--black);
+}
+
+/* Carousel */
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 2rem;
+}
+
+.product-grid {
+    columns: 3 300px;
+    column-gap: 20px;
+    padding-bottom: 50px;
+    width: 100%;
+}
+
+.product-card {
+    break-inside: avoid;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.product-card img {
+    width: 100%;
+    height: auto;
+    display: block;
+    background: #f6f6f6;
+    transition: filter 0.3s ease;
+}
+
+.card-info {
+    padding: 1.5rem;
+}
+
+/* Pinterest-style varying heights using different aspect ratios */
+.product-card:nth-child(3n+1) img {
+    aspect-ratio: 1 / 1.1;
+}
+
+.product-card:nth-child(3n+2) img {
+    aspect-ratio: 1 / 1.4;
+}
+
+.product-card:nth-child(3n+3) img {
+    aspect-ratio: 1 / 0.9;
+}
+
+.card-info h4 {
+    font-size: 1.25rem;
+    margin-bottom: 0.25rem;
+}
+
+.card-info .category {
+    color: #707072;
+    font-size: 0.9rem;
+}
+
+.nav-btn {
+    background: #f5f5f5;
+    border: none;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.2rem;
+    margin-left: 10px;
+    transition: background 0.3s;
+}
+
+.nav-btn:hover {
+    background: #e5e5e5;
+}
+
+/* Banner */
+.banner-container {
+    width: 100%;
+}
+
+.banner-image-wrapper {
+    position: relative;
+    height: 85vh;
+    width: 100%;
+    overflow: hidden;
+}
+
+.banner-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.banner-overlay {
+    position: absolute;
+    bottom: 10%;
+    left: 5%;
+    color: var(--white);
+    max-width: 60%;
+}
+
+.banner-overlay .title-huge {
+    margin-bottom: 1.5rem;
+}
+
+/* Essentials Grid */
+.essentials-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-top: 2rem;
+}
+
+.essential-item {
+    position: relative;
+    aspect-ratio: 4/5;
+    overflow: hidden;
+    cursor: pointer;
+    background: #f5f5f5;
+}
+
+.essential-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.essential-item:hover img {
+    transform: scale(1.05);
+}
+
+.full-screen-text {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.1);
+    transition: background 0.3s ease;
+}
+
+.essential-item:hover .full-screen-text {
+    background: rgba(0, 0, 0, 0.4);
+}
+
+.full-screen-text span {
+    color: var(--white);
+    font-family: var(--font-heading);
+    font-size: clamp(2rem, 6vw, 5rem);
+    font-weight: 700;
+    line-height: 1;
+    text-align: center;
+    pointer-events: none;
+    text-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+    opacity: 0.9;
+    transform: translateY(0);
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease;
+}
+
+.essential-item:hover .full-screen-text span {
+    opacity: 1;
+    transform: translateY(-10px);
+}
+
+/* Footer */
+.footer {
+    background: var(--black);
+    padding: 100px 0 50px;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px;
+}
+
+.footer-col h4 {
+    font-size: 0.85rem;
+    margin-bottom: 1.5rem;
+    letter-spacing: 0;
+}
+
+.footer-col ul {
+    list-style: none;
+}
+
+.footer-col ul li {
+    margin-bottom: 0.75rem;
+}
+
+.footer-col ul li a {
+    color: #7e7e7e;
+    text-decoration: none;
+    font-size: 0.85rem;
+    transition: color 0.3s;
+}
+
+.footer-col ul li a:hover {
+    color: var(--white);
+}
+
+.footer-bottom {
+    margin-top: 100px;
+    padding-top: 20px;
+    border-top: 1px solid #222;
+    text-align: center;
+    color: #7e7e7e;
+    font-size: 0.75rem;
+}
+
+/* Mobile Adjustments */
+@media (max-width: 1024px) {
+    .product-grid {
+        columns: 2;
+    }
+
+    .essentials-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .product-grid {
+        columns: 1;
+    }
+
+    .essentials-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .banner-overlay {
+        max-width: 90%;
+        bottom: 5%;
+    }
+
+    .footer-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .container {
+        padding: 0 20px;
+    }
+}
